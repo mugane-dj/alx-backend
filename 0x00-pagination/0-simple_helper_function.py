@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """
-index_range - computes the start index and end index corresponding
-              to the range of indexes to return in a list for
-              particular pagination parameters.
+Simple helper function
 """
 from typing import Tuple
 
