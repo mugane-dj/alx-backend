@@ -51,6 +51,18 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """
+        The `get_page` function retrieves a specific page of data from a
+        dataset, based on the given page number and page size.
+
+        :param page: The `page` parameter is an integer that represents
+                     the page number of the dataset you want to retrieve.
+        :type page: int (optional)
+        :param page_size: The `page_size` parameter determines the number
+                          of items that will be displayed on each page.
+        :type page_size: int (optional)
+        :return: a list of lists.
+        """
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
         idx_range = index_range(page, page_size)
