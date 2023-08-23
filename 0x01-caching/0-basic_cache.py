@@ -7,6 +7,8 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class BasicCache(BaseCaching):
 
+    MAX_ITEMS = None
+
     def init(self):
         """
         Initialize
