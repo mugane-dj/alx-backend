@@ -7,7 +7,6 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class BasicCache(BaseCaching):
 
-    MAX_ITEMS = 0
     def init(self):
         """
         Initialize
@@ -24,7 +23,7 @@ class BasicCache(BaseCaching):
         :param item: The "item" parameter is the value that you want to
                      store in the cache.
         """
-        if key and item:
+        if key is not None and item is not None:
             self.cache_data[key] = item
 
     def get(self, key):
