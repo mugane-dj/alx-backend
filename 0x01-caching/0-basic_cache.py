@@ -7,12 +7,6 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class BasicCache(BaseCaching):
 
-    def init(self):
-        """
-        Initialize
-        """
-        super().__init__()
-
     def put(self, key, item):
         """
         The function `put` adds a key-value pair to the `cache_data`
