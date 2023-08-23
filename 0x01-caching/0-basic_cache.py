@@ -6,6 +6,9 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class BasicCache(BaseCaching):
+    """
+    Inherits from BaseCaching class and overrides put and get method
+    """
 
     def put(self, key, item):
         """
