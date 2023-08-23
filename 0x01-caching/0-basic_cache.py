@@ -30,6 +30,6 @@ class BasicCache(BaseCaching):
         :return: The value associated with the given key in the cache_data
                  dictionary is being returned.
         """
-        if key is None or key not in self.cache_data.keys():
-            return None
-        return self.cache_data[key]
+        if key is not None and key in self.cache_data.keys():
+            return self.cache_data[key]
+        return None
