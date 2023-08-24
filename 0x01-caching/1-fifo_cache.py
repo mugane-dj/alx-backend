@@ -29,11 +29,9 @@ class FIFOCache(BaseCaching):
             self.cache_data[key] = item
 
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                for key in self.cache_data.keys():
-                    first_key = key
-                    break
-                del self.cache_data[first_key]
+                first_key = list(self.cache_data.keys())[0]
                 print("DISCARD: {}".format(first_key))
+                del self.cache_data[first_key]
 
     def get(self, key):
         """
@@ -45,6 +43,6 @@ class FIFOCache(BaseCaching):
         :return: The value associated with the given key in the cache_data
                  dictionary is being returned.
         """
-        if key is not None and key in self.cache_data.keys():
+        if key in self.cache_data:
             return self.cache_data[key]
         return None
