@@ -7,13 +7,14 @@ BaseCaching = __import__('base_caching').BaseCaching
 class MRUCache(BaseCaching):
     """
     Inherits from BaseCaching class and overrides put and get method
-    using LIFO replacement policy
+    using LRU replacement policy
     """
     def __init__(self):
         """
         Initialize
         """
         super().__init__()
+        self.mru_order = []
 
     def put(self, key, item):
         """
@@ -26,11 +27,15 @@ class MRUCache(BaseCaching):
                      store in the cache.
         """
         if key is not None and item is not None:
-            if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-                mru_key = list(self.cache_data.keys())[-1]
-                print("DISCARD: {}".format(mru_key))
-                del self.cache_data[mru_key]
+            if key in self.cache_data:
+                self.mru_order.remove(key)
+            elif len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+                most_used_key = self.mru_order.pop()
+                print("DISCARD: {}".format(most_used_key))
+                del self.cache_data[most_used_key]
+
             self.cache_data[key] = item
+            self.mru_order.append(key)
 
     def get(self, key):
         """
@@ -42,6 +47,8 @@ class MRUCache(BaseCaching):
         :return: The value associated with the given key in the cache_data
                  dictionary is being returned.
         """
-        if key is not None and key in self.cache_data.keys():
+        if key in self.cache_data:
+            self.mru_order.remove(key)
+            self.mru_order.append(key)
             return self.cache_data[key]
         return None
