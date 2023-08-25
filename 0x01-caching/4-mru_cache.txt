@@ -1,0 +1,26 @@
+# 4. MRU Caching
+Class MRUCache:
+    Initialize:
+        Call Superclass Constructor (BaseCaching)
+
+        Initialize mru_order as an empty list
+
+    Method put(key, item):
+        If key is not None and item is not None:
+            If key exists in cache_data:
+                Remove key from mru_order
+            Else if cache_data size >= MAX_ITEMS:
+                Pop the last element (most used key) from mru_order
+                Print "DISCARD: most_used_key"
+                Remove most_used_key from cache_data
+
+            Set cache_data[key] = item
+            Append key to mru_order
+
+    Method get(key):
+        If key exists in cache_data:
+            Remove key from mru_order
+            Append key to mru_order
+            Return cache_data[key]
+        Else:
+            Return None

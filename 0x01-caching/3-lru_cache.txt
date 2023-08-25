@@ -1,0 +1,26 @@
+# 3. LRU Caching
+Class LRUCache:
+    Initialize:
+        Call Superclass Constructor (BaseCaching)
+
+        Initialize lru_order as an empty list
+
+    Method put(key, item):
+        If key is not None and item is not None:
+            If key exists in cache_data:
+                Remove key from lru_order
+            Else if cache_data size >= MAX_ITEMS:
+                Pop the first element (least used key) from lru_order
+                Print "DISCARD: least_used_key"
+                Remove least_used_key from cache_data
+
+            Set cache_data[key] = item
+            Append key to lru_order
+
+    Method get(key):
+        If key exists in cache_data:
+            Remove key from lru_order
+            Append key to lru_order
+            Return cache_data[key]
+        Else:
+            Return None

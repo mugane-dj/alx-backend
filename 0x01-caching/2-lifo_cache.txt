@@ -1,0 +1,19 @@
+# 2. LIFO Caching
+Class LIFOCache:
+    Initialize:
+        Call Superclass Constructor (BaseCaching)
+
+    Method put(key, item):
+        If key is not None and item is not None:
+
+            if cache_data size >= MAX_ITEMS:
+                Get key of last item in cache_data (LIFO)
+                Delete cache_data[key]
+                PRINT DISCARD: key
+            Set cache_data[key] = item
+
+    Method get(key):
+        If key exists in cache_data:
+            Return cache_data[key]
+        Else:
+            Return None

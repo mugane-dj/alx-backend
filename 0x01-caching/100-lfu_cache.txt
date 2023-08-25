@@ -1,0 +1,28 @@
+# 5. LFU Caching
+Class LFUCache:
+    Initialize:
+        Call Superclass Constructor (BaseCaching)
+
+        Initialize freq_dict as an empty dictionary
+
+    Method put(key, item):
+        If key is not None and item is not None:
+            If key exists in cache_data:
+                Update cache_data[key] = item
+                Increment freq_dict[key]
+            Else: 
+                if cache_data size >= MAX_ITEMS:
+                    Get key with least frequency from freq_dict
+                    Print "DISCARD: least_freq_key"
+                    Remove least_freq_key from cache_data
+                    Remove least_freq_key from freq_dict
+
+                Set cache_data[key] = item
+                Set freq_dict[key] = 1
+
+    Method get(key):
+        If key exists in cache_data:
+            Increment freq_dict[key]
+            Return cache_data[key]
+        Else:
+            Return None

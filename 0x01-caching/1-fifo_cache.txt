@@ -1,0 +1,19 @@
+# 1. FIFO Caching
+Class FIFOCache:
+    Initialize:
+        Call Superclass Constructor (BaseCaching)
+
+    Method put(key, item):
+        If key is not None and item is not None:
+            Set cache_data[key] = item
+
+            if cache_data size > MAX_ITEMS:
+                Get key of first item in cache_data (FIFO)
+                Delete cache_data[key]
+                PRINT DISCARD: key
+
+    Method get(key):
+        If key exists in cache_data:
+            Return cache_data[key]
+        Else:
+            Return None
