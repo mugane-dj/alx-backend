@@ -2,6 +2,7 @@
 """
 Flask web application
 """
+import pytz
 from flask_babel import Babel, gettext
 from flask import Flask, g, request, render_template
 from typing import Dict
@@ -53,12 +54,21 @@ def get_timezone():
     """
     Configure timezone
     """
-    if request.args.get("timezone"):
-        return request.args.get("timezone")
-    elif g.user:
-        return g.user.get("timezone")
+    user_timezone = None
+    param_timezone = request.args.get("timezone")
+    if param_timezone:
+        try:
+            pytz.timezone(param_timezone)
+        except pytz.UnknownTimeZoneError:
+            raise pytz.UnknownTimeZoneError
 
-    return Config.BABEL_DEFAULT_TIMEZONE
+    if not user_timezone and g.user and g.user.get("timezone"):
+        try:
+            pytz.timezone(param_timezone)
+        except pytz.UnknownTimeZoneError:
+            raise pytz.UnknownTimeZoneError
+
+    return user_timezone or Config.BABEL_DEFAULT_TIMEZONE
 
 
 def get_user(login_as: int) -> Dict:
