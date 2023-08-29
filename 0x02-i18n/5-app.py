@@ -56,7 +56,7 @@ def before_request() -> None:
     sets user on flask.g.user
     """
     login_as = request.args.get("login_as")
-    user = get_user(int(login_as) if login_as else None)
+    user = get_user(int(login_as)) if login_as else None
     setattr(g, "user", user)
 
 
