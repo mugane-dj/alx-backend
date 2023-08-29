@@ -48,6 +48,19 @@ def get_locale():
     return Config.BABEL_DEFAULT_LOCALE
 
 
+@babel.timezoneselector
+def get_timezone():
+    """
+    Configure timezone
+    """
+    if request.args.get("timezone"):
+        return request.args.get("timezone")
+    elif g.user:
+        return g.user.get("timezone")
+
+    return Config.BABEL_DEFAULT_TIMEZONE
+
+
 def get_user(login_as: int) -> Dict:
     """
     Gets user from users dict
@@ -76,7 +89,7 @@ def index():
     not_logged_in = gettext("not_logged_in")
     username = g.user.get("name") if g.user else None
     return render_template(
-        "6-index.html",
+        "7-index.html",
         home_title=home_title,
         home_header=home_header,
         logged_in_as=logged_in_as,
