@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Parametrize templates using gettext function and translations
+Parametrize templates
+gettext - facilitate the translation of text and messages
 """
 from flask_babel import Babel, gettext
 from flask import Flask, request, render_template
