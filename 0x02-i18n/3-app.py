@@ -2,7 +2,7 @@
 """
 Flask web application
 """
-from flask_babel import Babel, gettext
+from flask_babel import Babel, _
 from flask import Flask, request, render_template
 
 app = Flask(__name__)
@@ -33,8 +33,8 @@ def get_locale():
 @app.route("/")
 def index():
     """Renders index.html"""
-    home_title = gettext("home_title")
-    home_header = gettext("home_header")
+    home_title = _("home_title")
+    home_header = _("home_header")
     return render_template(
         "3-index.html", home_title=home_title, home_header=home_header
     )
