@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Flask web application
+Parametrize templates using gettext function and translations
 """
 from flask_babel import Babel, gettext
 from flask import Flask, request, render_template
@@ -33,8 +33,7 @@ def get_locale():
 @app.route("/")
 def index():
     """
-    Renders index.html using `render_template` function
-    uses `gettext` function to get translations
+    Renders index.html
     """
     home_title = gettext("home_title")
     home_header = gettext("home_header")
