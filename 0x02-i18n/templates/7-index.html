@@ -6,9 +6,9 @@
 <body>
     <h1>{{_('home_header')}}</h1>
     {% if username is none %}
-        <p1>{{_('not_logged_in')}}</p1>
+        <p>{{_('not_logged_in')}}</p>
     {% else %}
-        <p1>{{_('logged_in_as', username=username)}}</p1>
+        <p>{{_('logged_in_as', username=username)}}</p>
     {% endif %}
 </body>
 </html>
