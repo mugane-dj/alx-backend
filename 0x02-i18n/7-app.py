@@ -3,12 +3,12 @@
 Infer appropriate time zone
 """
 import pytz
-from flask_babel import Babel, gettext
+import flask_babel
 from flask import Flask, g, request, render_template
 from typing import Dict
 
 app = Flask(__name__)
-babel = Babel(app)
+babel = flask_babel.Babel(app)
 
 
 class Config:
@@ -93,10 +93,10 @@ def before_request() -> None:
 @app.route("/")
 def index():
     """Renders index.html"""
-    home_title = gettext("home_title")
-    home_header = gettext("home_header")
-    logged_in_as = gettext("logged_in_as")
-    not_logged_in = gettext("not_logged_in")
+    home_title = flask_babel.gettext("home_title")
+    home_header = flask_babel.gettext("home_header")
+    logged_in_as = flask_babel.gettext("logged_in_as")
+    not_logged_in = flask_babel.gettext("not_logged_in")
     username = g.user.get("name") if g.user else None
     return render_template(
         "7-index.html",
