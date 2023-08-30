@@ -2,11 +2,11 @@
 """
 Parametrize templates
 """
-from flask_babel import Babel, gettext
+import flask_babel
 from flask import Flask, request, render_template
 
 app = Flask(__name__)
-babel = Babel(app)
+babel = flask_babel.Babel(app)
 
 
 class Config:
@@ -35,8 +35,8 @@ def index():
     """
     Renders index.html
     """
-    home_title = gettext("home_title")  # Translate home_title
-    home_header = gettext("home_header")  # Translate home_header
+    home_title = flask_babel.gettext("home_title")
+    home_header = flask_babel.gettext("home_heade")
     return render_template(
         "3-index.html", home_title=home_title, home_header=home_header
     )
