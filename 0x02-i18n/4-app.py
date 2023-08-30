@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Flask web application
+Force locale with URL parameter
 """
 from flask_babel import Babel, gettext
 from flask import Flask, request, render_template

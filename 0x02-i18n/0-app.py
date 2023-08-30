@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-starts a Flask web application
+Basic Flask app
 """
 
 

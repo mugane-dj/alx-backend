@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Flask web application
+Mock logging in
 """
 from flask_babel import Babel, gettext
 from flask import Flask, g, request, render_template

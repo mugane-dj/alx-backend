@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Flask web application
+Infer appropriate time zone
 """
 import pytz
 from flask_babel import Babel, gettext
