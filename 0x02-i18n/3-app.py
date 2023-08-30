@@ -35,8 +35,8 @@ def index():
     """
     Renders index.html
     """
-    home_title = gettext("home_title")
-    home_header = gettext("home_header")
+    home_title = gettext("home_title")  # Translate home_title
+    home_header = gettext("home_header")  # Translate home_header
     return render_template(
         "3-index.html", home_title=home_title, home_header=home_header
     )
