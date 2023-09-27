@@ -12,8 +12,6 @@ const job = push_notification_code.create('send notification', {
 
 job.on('complete', () => {
   console.log('Notification job completed');
-});
-
-job.on('failed', () => {
+}).on('failed', () => {
   console.log('Notification job failed');
 });
