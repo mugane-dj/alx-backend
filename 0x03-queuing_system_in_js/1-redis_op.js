@@ -1,22 +1,24 @@
-// create redis client & implement set and get functions
+// create redis client & implement set get functions
 import { createClient, print } from 'redis';
 
-let client;
+const client = createClient();
 
-(async () => {
-  client = await createClient()
-  .on('error', err => console.log(`Redis client not connected to the server: ${err}`))
-  .on('ready', () => console.log('Redis client connected to the server'))
-  .connect();
-})();
+client.on("error", function(err) {
+ console.log(`Redis client not connected to the server: ${err}`);
+});
 
-async function setNewSchool (schoolName, value) {
-  await client.set(schoolName, value, print);
+client.on("connect", function() {
+  console.log('Redis client connected to the server');
+});
+
+function setNewSchool (schoolName, value) {
+  client.set(schoolName, value, print);
 }
 
-async function displaySchoolValue (schoolName) {
-  const output = await client.get(schoolName);
-  console.log(output);
+function displaySchoolValue (schoolName) {
+  client.get(schoolName, function (err, reply) {
+    console.log(reply);
+  });
 }
 
 displaySchoolValue('Holberton');
