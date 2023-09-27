@@ -4,7 +4,11 @@ import { createClient } from 'redis';
 const client = createClient();
 
 client.on("error", function(err) {
- console.log(`Redis client not connected to the server: ${err}`);
+  if (err.code === 'ECONNREFUSED') {
+    console.log(`Redis client not connected to the server: ${err}`);
+  } else {
+    throw err;
+  }
 });
 
 client.on("connect", function() {
