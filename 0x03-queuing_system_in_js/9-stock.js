@@ -1,8 +1,9 @@
 // Cache products with redis client
 import express from 'express';
-import { createClient } from 'redis';
+import { createClient, print } from 'redis';
 import { promisify } from 'util';
 
+const PORT = 1245;
 const app = express();
 const client = createClient();
 
@@ -34,14 +35,18 @@ const getItemById = (id) => {
 }
 
 const reserveStockById = (itemId, stock) => {
-  client.set(itemId, stock);
+  client.set(itemId, stock, print);
 }
 
 const getAsync = promisify(client.get).bind(client);
 
-const getCurrentReservedStockById = async(itemId) => {
-  const itemStock = await getAsync(itemId);
-  return itemStock;
+const getCurrentReservedStockById = async (itemId) => {
+  try {
+    const itemStock = await getAsync(itemId);
+    return itemStock;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 app.get('/list_products', (req, res) => {
@@ -54,13 +59,13 @@ app.get('/list_products', (req, res) => {
   res.json(formattedProducts);
 });
 
-app.get('/list_products/:itemId', (req, res) => {
+app.get('/list_products/:itemId', async (req, res) => {
   const id = parseInt(req.params.itemId);
   const item = getItemById(id);
   if (!item) {
     res.json({'status':'Product not found'});
   } else {
-   const reservedStock = getCurrentReservedStockById(item.id);
+   const reservedStock = await getCurrentReservedStockById(id);
    res.json({
      itemId: item.id,
      itemName: item.name,
@@ -71,4 +76,19 @@ app.get('/list_products/:itemId', (req, res) => {
   }
 });
 
-app.listen(1245);
+app.get('/reserve_product/:itemId', (req, res) => {
+  const id = parseInt(req.params.itemId);
+  const item = getItemById(id);
+  if (!item) {
+    res.json({'status':'Product not found'});
+  } else if (item.stock < 1) {
+    res.json({'status': 'Not enough stock available', 'itemId': item.id});
+  } else {
+    reserveStockById(item.id, 1);
+    res.json({'status': 'Reservation confirmed', 'itemId': item.id});
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port: ${PORT}`)
+});
