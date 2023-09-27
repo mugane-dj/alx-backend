@@ -1,4 +1,4 @@
-// create redis client & implement set get functions
+// create redis client & implement set and get functions
 import { createClient, print } from 'redis';
 
 const client = createClient();
